@@ -49,6 +49,8 @@ Intermediate Certificate: ./ssl/example/root_ca.pem
 cd ./example/docker/
 
 echo "127.0.0.1    my.example.ru" >> /etc/hosts # Add domain IP address into /etc/hosts file
+echo "127.0.0.1    my.example.com" >> /etc/hosts # Add domain IP address into /etc/hosts file
+
 echo "NGINX_PORT=8080" > .env # Add port settings into .env file
 ```
 
