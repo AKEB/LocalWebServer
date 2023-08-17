@@ -18,7 +18,7 @@ Password: changeme
 ### Add new proxy host
 
 ```bash
-Domain Name:           my.example.ru
+Domain Name:           my.example.ru my.example.com
 Scheme:                http
 Forward Hostname / IP: host.docker.internal
 Forward Port:          8080

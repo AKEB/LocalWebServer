@@ -38,8 +38,8 @@ export CURL_CA_BUNDLE=~/Work/LocalWebServer/ssl/root_ca.crt
 Прописываем в ./ssl/domains.conf две строчки
 
 ```bash
-domains[0]="localhost my.local.ru my.local.com"
-certnames[0]="localhost"
+domains[0]="my.example.ru my.example.com"
+certnames[0]="example"
 ```
 
 Запускаем скрипт
@@ -48,4 +48,4 @@ certnames[0]="localhost"
 ./cert.sh
 ```
 
-Если папки localhost не существовало, то она появится и внутри будут сертификаты
+Если папки ./ssl/example не существовало, то она появится и внутри будут сертификаты
