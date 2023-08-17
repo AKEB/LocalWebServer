@@ -39,7 +39,7 @@ Intermediate Certificate: ./ssl/example/root_ca.pem
 
 * Go to *Proxy Hosts* section and edit my.example.ru.
 * Go to SSL section and select your custom certificate
-* After save and run example project, you can check it [https://my.example.ru](https://my.example.ru)
+* After save and run example project, you can check it [https://my.example.ru](https://my.example.ru) or in terminal ```curl "https://my.example.ru"```
 
 ## Example Project
 
