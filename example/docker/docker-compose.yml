@@ -1,0 +1,27 @@
+version: "3.9"
+name: "example"
+services:
+
+  php-fpm:
+    image: babadzhanyan/php-fpm:8.2
+    volumes:
+      - ../:/var/www/html/:rw
+      - ./logs/php.log:/var/log/fpm-php.www.log:rw
+      - ./hosts.sh:/usr/local/etc/hosts.sh
+
+  nginx:
+    image: babadzhanyan/nginx:latest
+    hostname: my.example.ru
+    build:
+      context: ./nginx
+    volumes:
+      - ../:/var/www/html/:rw
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./logs/error.log:/var/log/nginx/error.log:rw
+      - ./logs/access.log:/var/log/nginx/access.log:rw
+    ports:
+      - ${NGINX_PORT}:80
+    depends_on:
+      - php-fpm
+    links:
+      - php-fpm
