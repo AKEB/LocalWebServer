@@ -1,0 +1,49 @@
+version: '3.8'
+name: "local_web_server"
+services:
+
+  nginx-proxy_local:
+    container_name: nginx_proxy_local
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+    environment:
+      DISABLE_IPV6: 'true'
+    healthcheck:
+      test: ["CMD", "/bin/check-health"]
+      interval: 10s
+      timeout: 3s
+    volumes:
+      - ${PWD}/nginx-proxy:/data
+      - ${PWD}/letsencrypt:/etc/letsencrypt
+    # network_mode: "host"
+
+  phpmyadmin_local:
+    container_name: phpmyadmin_local
+    hostname: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=phpmyadmin
+    ports:
+      - 8081:80
+    volumes:
+      - ${PWD}/phpmyadmin:/etc/phpmyadmin
+    # network_mode: "host"
+    depends_on:
+      - nginx-proxy_local
+      - mysql_local
+
+  mysql_local:
+    container_name: mysql_local
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ${PWD}/mysql/data:/var/lib/mysql
