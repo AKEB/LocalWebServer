@@ -22,7 +22,8 @@ RUN apt-get install -y --allow-unauthenticated \
 	libxslt-dev \
 	zlib1g-dev \
 	libssl-dev \
-	librdkafka-dev
+	librdkafka-dev \
+	mc iputils-ping curl ca-certificates wget nano
 
 RUN PHP_OPENSSL=yes \
 	&& pecl install imagick memcached msgpack rdkafka redis \
@@ -33,9 +34,6 @@ RUN PHP_OPENSSL=yes \
 	pdo_mysql gettext pcntl sysvmsg sysvsem sysvshm xsl calendar ffi shmop \
 	sockets opcache igbinary 
 
-RUN apt-get install -y  --allow-unauthenticated \
-	mc iputils-ping curl ca-certificates wget
-
 COPY hosts.sh /usr/local/etc/hosts.sh
 RUN chmod +x /usr/local/etc/hosts.sh && /usr/local/etc/hosts.sh
 
@@ -43,6 +41,9 @@ COPY php-fpm.conf /usr/local/etc/php-fpm.conf
 COPY www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY root_ca.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates -v
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # CMD ["php-fpm"]
 CMD ["/bin/bash", "-c", "/usr/local/etc/hosts.sh;php-fpm"]
 
