@@ -2,7 +2,7 @@ FROM php:7.3-fpm
 
 ENV TZ=Europe/Moscow
 
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 USER root
 

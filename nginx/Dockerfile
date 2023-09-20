@@ -1,12 +1,22 @@
 FROM nginx:latest
 
-# Install programs
-RUN apt-get update
-RUN apt-get install -y nano git procps ca-certificates
-
-RUN mkdir -p /var/www/html
+RUN mkdir -p /var/www/html \
+	&& mkdir -p /etc/cron.weekly \
+	&& mkdir -p /usr/share/GeoIP
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY root_ca.crt /usr/local/share/ca-certificates/
-RUN update-ca-certificates -v
+COPY geoip_update.sh /etc/cron.weekly/geoip_update
+COPY geoip_update.sh /root/geoip_update.sh
+
+# Install programs
+RUN apt-get clean && apt-get dist-upgrade \
+	&& apt-get update -y --allow-insecure-repositories \
+	&& apt-get install -y --allow-unauthenticated \
+	nano git procps ca-certificates mc wget curl iputils-ping
+
+RUN chmod +x /root/geoip_update.sh \
+	&& chmod +x /etc/cron.weekly/geoip_update \
+	&& /root/geoip_update.sh \
+	&& update-ca-certificates -v

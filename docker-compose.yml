@@ -12,6 +12,8 @@ services:
       - '81:81' # Admin Web Port
     environment:
       DISABLE_IPV6: 'true'
+      REAL_IP_HEADER: "X-Real-IP"
+      TRUSTED_PROXIES: "172.0.0.0/8, 10.0.0.0/8, 192.168.0.0/16"
     healthcheck:
       test: ["CMD", "/bin/check-health"]
       interval: 10s
