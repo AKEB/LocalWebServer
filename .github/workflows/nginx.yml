@@ -1,8 +1,8 @@
-name: build php-fpm:7.2
+name: build nginx
 
 on:
   push:
-    # branches: main
+  # branches: main
     tags:
       - '*'
 
@@ -30,11 +30,11 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Copy root certificate
-      run: echo "${{ secrets.ROOT_CRT }}" > ./php-fpm-7_2/root_ca.crt
+      run: echo "${{ secrets.ROOT_CRT }}" > ./nginx/root_ca.crt
 
     - name: build the image
       run: |
         docker buildx build \
         --push \
-        --tag babadzhanyan/php-fpm:7.2 \
-        --platform linux/amd64,linux/arm/v7,linux/arm64/v8 ./php-fpm-7_2/
+        --tag babadzhanyan/nginx:latest \
+        --platform linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64,linux/mips64le,linux/ppc64le,linux/s390x ./nginx/
