@@ -2,7 +2,7 @@ name: build php-fpm:7.2
 
 on:
   push:
-    branches: master
+    branches: main
 
 jobs:
     build:
