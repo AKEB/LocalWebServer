@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:8.3-fpm
 
 ENV TZ=Europe/Moscow
 
@@ -23,18 +23,26 @@ RUN apt-get install -y --allow-unauthenticated \
 	zlib1g-dev \
 	libssl-dev \
 	librdkafka-dev \
-	mc iputils-ping curl ca-certificates wget nano
+	mc iputils-ping curl ca-certificates wget nano git
+
+RUN git clone https://github.com/Imagick/imagick.git --depth 1 /tmp/imagick && \
+	cd /tmp/imagick && \
+	git fetch origin master && \
+	git switch master && \
+	cd /tmp/imagick && \
+	phpize && \
+	./configure && \
+	make && \
+	make install && \
+	docker-php-ext-enable imagick
 
 RUN PHP_OPENSSL=yes \
-	&& pecl install imagick memcached msgpack rdkafka redis \
-	&& docker-php-ext-enable imagick memcached msgpack rdkafka redis \
+	&& pecl install memcached msgpack rdkafka redis \
+	&& docker-php-ext-enable memcached msgpack rdkafka redis \
 	&& pecl bundle -d /usr/src/php/ext/ igbinary \
-	&& docker-php-ext-configure gd \
-	--with-gd --with-webp-dir --with-jpeg-dir \
-	--with-png-dir --with-zlib-dir --with-xpm-dir \
-	--with-freetype-dir \
-	&& docker-php-ext-install exif xml zip bcmath gd intl mysqli \
-	pdo_mysql gettext pcntl sysvmsg sysvsem sysvshm xsl shmop \
+	&& docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+	&& docker-php-ext-install exif xml filter zip bcmath gd intl mysqli \
+	pdo_mysql gettext pcntl sysvmsg sysvsem sysvshm xsl ffi shmop \
 	sockets opcache igbinary 
 
 COPY hosts.sh /usr/local/etc/hosts.sh

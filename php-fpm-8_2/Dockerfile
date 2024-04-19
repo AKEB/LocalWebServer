@@ -31,7 +31,7 @@ RUN PHP_OPENSSL=yes \
 	&& pecl bundle -d /usr/src/php/ext/ igbinary \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
 	&& docker-php-ext-install exif xml filter zip bcmath gd intl mysqli \
-	pdo_mysql gettext pcntl sysvmsg sysvsem sysvshm xsl calendar ffi shmop \
+	pdo_mysql gettext pcntl sysvmsg sysvsem sysvshm xsl ffi shmop \
 	sockets opcache igbinary 
 
 COPY hosts.sh /usr/local/etc/hosts.sh

@@ -26,7 +26,8 @@ services:
   phpmyadmin_local:
     container_name: phpmyadmin_local
     hostname: phpmyadmin
-    image: phpmyadmin/phpmyadmin
+    # image: phpmyadmin/phpmyadmin
+    image: arm64v8/phpmyadmin
     restart: unless-stopped
     environment:
       - VIRTUAL_HOST=phpmyadmin
