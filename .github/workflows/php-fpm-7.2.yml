@@ -28,7 +28,7 @@ jobs:
             password: ${{ secrets.DOCKERHUB_TOKEN }}
 
         - name: Copy root certificate
-          run: cp ./ssl/root_ca.crt ./php-fpm-7_2/
+          run: echo "${{ secrets.ROOT_CRT }}" > ./php-fpm-7_2/root_ca.crt
 
         - name: build the image
           run: |
