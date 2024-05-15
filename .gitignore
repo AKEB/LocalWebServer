@@ -1,0 +1,10 @@
+/mysql/
+/letsencrypt/
+/nginx-proxy/
+/phpmyadmin/
+/hosts
+/ssl/*
+.*
+/logs/*.log
+root_ca.crt
+/jobs/
