@@ -65,7 +65,6 @@ RUN chmod +x /usr/local/etc/hosts.sh && /usr/local/etc/hosts.sh
 
 RUN mkdir -p /usr/etc/php-fpm.d/
 COPY php-fpm.conf /etc/php/8.2/fpm/php-fpm.conf
-COPY www.conf /usr/etc/php-fpm.d/www.conf
 COPY root_ca.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates -v
 

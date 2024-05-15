@@ -12,6 +12,10 @@ cp ${PWD}/ssl/root_ca.crt ${PWD}/php-fpm-8_3/
 rm -rf ${PWD}/build/*.*
 mkdir -p ${PWD}/build/
 
+FAIL=0
+echo "Starting buildings..."
+
+
 # Nginx
 # --push \
 # --platform linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64,linux/mips64le,linux/ppc64le,linux/s390x \
@@ -57,4 +61,15 @@ docker build \
   --tag babadzhanyan/php-fpm:8.3 \
   ${PWD}/php-fpm-8_3/ > ${PWD}/build/php-fpm-8_3.log 2>&1 &
 
-wait
+
+for job in `jobs -p`
+do
+   wait $job || let "FAIL+=1"
+done
+
+if [ "$FAIL" == "0" ];
+then
+    echo "All jobs completed!"
+else
+    echo "Jobs FAILED: ($FAIL)"
+fi
