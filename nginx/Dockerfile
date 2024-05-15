@@ -16,6 +16,8 @@ RUN apt-get clean && apt-get dist-upgrade \
 	&& apt-get install -y --allow-unauthenticated \
 	nano git procps ca-certificates mc wget curl iputils-ping
 
+RUN mkdir -p /var/log/nginx/ && touch /var/log/nginx/error.log && touch /var/log/nginx/access.log
+
 RUN chmod +x /root/geoip_update.sh \
 	&& chmod +x /etc/cron.weekly/geoip_update \
 	&& /root/geoip_update.sh \
