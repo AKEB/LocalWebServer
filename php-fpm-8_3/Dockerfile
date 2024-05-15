@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM debian:12.5-slim
 
 ENV TZ=Europe/Moscow
 
@@ -10,52 +10,67 @@ RUN apt-get clean && apt-get dist-upgrade \
 	&& apt-get update -y --allow-insecure-repositories
 
 RUN apt-get install -y --allow-unauthenticated \
-	libmagickwand-dev \
-	libmagickcore-dev \
-	libwebp-dev \
-	libjpeg62-turbo-dev \
-	libpng-dev libxpm-dev \
-	libfreetype6-dev \
-	libzip-dev \
-	libz-dev \
-	libmemcached-dev \
-	libxslt-dev \
-	zlib1g-dev \
-	libssl-dev \
-	librdkafka-dev \
-	mc iputils-ping curl ca-certificates wget nano git
+    iputils-ping curl mc \
+    ca-certificates apt-transport-https software-properties-common lsb-release \
+    wget nano git sqlite3
 
-RUN git clone https://github.com/Imagick/imagick.git --depth 1 /tmp/imagick && \
-	cd /tmp/imagick && \
-	git fetch origin master && \
-	git switch master && \
-	cd /tmp/imagick && \
-	phpize && \
-	./configure && \
-	make && \
-	make install && \
-	docker-php-ext-enable imagick
+RUN curl -sSL https://packages.sury.org/php/README.txt | bash -x
 
-RUN PHP_OPENSSL=yes \
-	&& pecl install memcached msgpack rdkafka redis \
-	&& docker-php-ext-enable memcached msgpack rdkafka redis \
-	&& pecl bundle -d /usr/src/php/ext/ igbinary \
-	&& docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-	&& docker-php-ext-install exif xml filter zip bcmath gd intl mysqli \
-	pdo_mysql gettext pcntl sysvmsg sysvsem sysvshm xsl ffi shmop \
-	sockets opcache igbinary 
+RUN apt-get clean && apt-get update -y --allow-insecure-repositories
+
+RUN apt-get install -y --allow-unauthenticated \
+    php8.3-fpm php8.3-common \
+    php8.3-bcmath \
+    php8.3-curl \
+    php8.3-dom \
+    php8.3-gd \
+    php8.3-igbinary \
+    php8.3-imagick \
+    php8.3-intl \
+    php8.3-mbstring \
+    php8.3-memcached \
+    php8.3-msgpack \
+    php8.3-mysqli \
+    php8.3-mysqlnd \
+    php8.3-sqlite3 \
+    php8.3-zip \
+    php8.3-redis \
+    php8.3-rdkafka \
+    php8.3-bz2 \
+    php8.3-cgi \
+    php8.3-cli \
+    php8.3-decimal \
+    php8.3-dev \
+    php8.3-raphf \
+    php8.3-http \
+    php8.3-ldap \
+    php8.3-mongodb \
+    php8.3-oauth \
+    php8.3-odbc \
+    php8.3-opcache \
+    php8.3-pgsql \
+    php8.3-protobuf \
+    php8.3-smbclient \
+    php8.3-soap \
+    php8.3-ssh2 \
+    php8.3-uuid \
+    php8.3-xdebug \
+    php8.3-yaml
+
+RUN apt-get clean && apt-get dist-upgrade \
+    && apt-get update -y --allow-insecure-repositories
 
 COPY hosts.sh /usr/local/etc/hosts.sh
 RUN chmod +x /usr/local/etc/hosts.sh && /usr/local/etc/hosts.sh
 
-COPY php-fpm.conf /usr/local/etc/php-fpm.conf
-COPY www.conf /usr/local/etc/php-fpm.d/www.conf
+RUN mkdir -p /usr/etc/php-fpm.d/
+COPY php-fpm.conf /etc/php/8.3/fpm/php-fpm.conf
+COPY www.conf /usr/etc/php-fpm.d/www.conf
 COPY root_ca.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates -v
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# CMD ["php-fpm"]
-CMD ["/bin/bash", "-c", "/usr/local/etc/hosts.sh;php-fpm"]
+CMD ["/bin/bash", "-c", "/usr/local/etc/hosts.sh;php-fpm8.3 -F"]
 
 EXPOSE 9000

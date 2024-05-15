@@ -35,7 +35,7 @@ RUN PHP_OPENSSL=yes \
 	--with-freetype-dir \
 	&& docker-php-ext-install exif xml zip bcmath gd intl mysqli \
 	pdo_mysql gettext pcntl sysvmsg sysvsem sysvshm xsl calendar shmop \
-	sockets opcache igbinary 
+	sockets opcache igbinary
 
 COPY hosts.sh /usr/local/etc/hosts.sh
 RUN chmod +x /usr/local/etc/hosts.sh && /usr/local/etc/hosts.sh
