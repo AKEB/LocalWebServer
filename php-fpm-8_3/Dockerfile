@@ -37,23 +37,23 @@ RUN apt-get install -y --allow-unauthenticated \
     php8.3-redis \
     php8.3-rdkafka \
     php8.3-bz2 \
-    php8.3-cgi \
-    php8.3-cli \
-    php8.3-decimal \
-    php8.3-dev \
-    php8.3-raphf \
-    php8.3-http \
-    php8.3-ldap \
-    php8.3-mongodb \
-    php8.3-oauth \
-    php8.3-odbc \
-    php8.3-opcache \
-    php8.3-pgsql \
-    php8.3-protobuf \
-    php8.3-smbclient \
-    php8.3-soap \
-    php8.3-ssh2 \
-    php8.3-uuid \
+    # php8.3-cgi \
+    # php8.3-cli \
+    # php8.3-decimal \
+    # php8.3-dev \
+    # php8.3-raphf \
+    # php8.3-http \
+    # php8.3-ldap \
+    # php8.3-mongodb \
+    # php8.3-oauth \
+    # php8.3-odbc \
+    # php8.3-opcache \
+    # php8.3-pgsql \
+    # php8.3-protobuf \
+    # php8.3-smbclient \
+    # php8.3-soap \
+    # php8.3-ssh2 \
+    # php8.3-uuid \
     php8.3-xdebug \
     php8.3-yaml
 

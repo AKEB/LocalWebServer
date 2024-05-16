@@ -37,23 +37,23 @@ RUN apt-get install -y --allow-unauthenticated \
     php8.1-redis \
     php8.1-rdkafka \
     php8.1-bz2 \
-    php8.1-cgi \
-    php8.1-cli \
-    php8.1-decimal \
-    php8.1-dev \
-    php8.1-raphf \
-    php8.1-http \
-    php8.1-ldap \
-    php8.1-mongodb \
-    php8.1-oauth \
-    php8.1-odbc \
-    php8.1-opcache \
-    php8.1-pgsql \
-    php8.1-protobuf \
-    php8.1-smbclient \
-    php8.1-soap \
-    php8.1-ssh2 \
-    php8.1-uuid \
+    # php8.1-cgi \
+    # php8.1-cli \
+    # php8.1-decimal \
+    # php8.1-dev \
+    # php8.1-raphf \
+    # php8.1-http \
+    # php8.1-ldap \
+    # php8.1-mongodb \
+    # php8.1-oauth \
+    # php8.1-odbc \
+    # php8.1-opcache \
+    # php8.1-pgsql \
+    # php8.1-protobuf \
+    # php8.1-smbclient \
+    # php8.1-soap \
+    # php8.1-ssh2 \
+    # php8.1-uuid \
     php8.1-xdebug \
     php8.1-yaml
 

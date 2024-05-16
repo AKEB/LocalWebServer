@@ -37,22 +37,22 @@ RUN apt-get install -y --allow-unauthenticated \
     php7.3-redis \
     php7.3-rdkafka \
     php7.3-bz2 \
-    php7.3-cgi \
-    php7.3-cli \
-    php7.3-decimal \
-    php7.3-dev \
-    php7.3-raphf \
-    php7.3-http \
-    php7.3-ldap \
-    php7.3-mongodb \
-    php7.3-oauth \
-    php7.3-odbc \
-    php7.3-opcache \
-    php7.3-pgsql \
-    php7.3-smbclient \
-    php7.3-soap \
-    php7.3-ssh2 \
-    php7.3-uuid \
+    # php7.3-cgi \
+    # php7.3-cli \
+    # php7.3-decimal \
+    # php7.3-dev \
+    # php7.3-raphf \
+    # php7.3-http \
+    # php7.3-ldap \
+    # php7.3-mongodb \
+    # php7.3-oauth \
+    # php7.3-odbc \
+    # php7.3-opcache \
+    # php7.3-pgsql \
+    # php7.3-smbclient \
+    # php7.3-soap \
+    # php7.3-ssh2 \
+    # php7.3-uuid \
     php7.3-xdebug \
     php7.3-yaml
 

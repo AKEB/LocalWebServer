@@ -5,8 +5,7 @@ IP=`getent hosts host.docker.internal | awk '{print $1}'`
 
 echo "IP=${IP}"
 
-echo "${IP} my.example.ru" >> /etc/hosts
-echo "${IP} my.example.com" >> /etc/hosts
+echo "${IP} ${DOMAIN_NAME}" >> /etc/hosts
 
 getent hosts nginx >> /etc/hosts
 

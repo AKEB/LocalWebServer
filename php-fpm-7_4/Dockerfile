@@ -37,22 +37,22 @@ RUN apt-get install -y --allow-unauthenticated \
     php7.4-redis \
     php7.4-rdkafka \
     php7.4-bz2 \
-    php7.4-cgi \
-    php7.4-cli \
-    php7.4-decimal \
-    php7.4-dev \
-    php7.4-raphf \
-    php7.4-http \
-    php7.4-ldap \
-    php7.4-mongodb \
-    php7.4-oauth \
-    php7.4-odbc \
-    php7.4-opcache \
-    php7.4-pgsql \
-    php7.4-smbclient \
-    php7.4-soap \
-    php7.4-ssh2 \
-    php7.4-uuid \
+    # php7.4-cgi \
+    # php7.4-cli \
+    # php7.4-decimal \
+    # php7.4-dev \
+    # php7.4-raphf \
+    # php7.4-http \
+    # php7.4-ldap \
+    # php7.4-mongodb \
+    # php7.4-oauth \
+    # php7.4-odbc \
+    # php7.4-opcache \
+    # php7.4-pgsql \
+    # php7.4-smbclient \
+    # php7.4-soap \
+    # php7.4-ssh2 \
+    # php7.4-uuid \
     php7.4-xdebug \
     php7.4-yaml
 

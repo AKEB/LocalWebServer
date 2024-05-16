@@ -23,6 +23,12 @@ docker build \
   --tag babadzhanyan/nginx:latest \
   ${PWD}/nginx/ > ${PWD}/build/nginx.log 2>&1 &
 
+# # PHP 7.1
+docker build \
+  --tag babadzhanyan/php-fpm:7.1 \
+  ${PWD}/php-fpm-7_1/ > ${PWD}/build/php-fpm-7_1.log 2>&1 &
+
+
 # # PHP 7.2
 # --push \
 # --platform linux/amd64,linux/arm/v7,linux/arm64/v8 \
