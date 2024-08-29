@@ -6,13 +6,13 @@ WORKDIR /var/www/html
 
 USER root
 
-RUN apt-get clean && apt-get dist-upgrade \
+RUN apt-get clean && apt-get dist-upgrade -y \
 	&& apt-get update -y --allow-insecure-repositories
 
 RUN apt-get install -y --allow-unauthenticated \
-    iputils-ping curl mc \
-    ca-certificates apt-transport-https software-properties-common lsb-release \
-    wget nano git sqlite3
+  iputils-ping curl \
+  ca-certificates apt-transport-https software-properties-common lsb-release \
+  wget nano git sqlite3
 
 RUN curl -sSL https://packages.sury.org/php/README.txt | bash -x
 
@@ -57,11 +57,13 @@ RUN apt-get install -y --allow-unauthenticated \
     php8.3-xdebug \
     php8.3-yaml
 
-RUN apt-get clean && apt-get dist-upgrade \
+RUN apt-get clean && apt-get dist-upgrade -y \
     && apt-get update -y --allow-insecure-repositories
 
 COPY hosts.sh /usr/local/etc/hosts.sh
 RUN chmod +x /usr/local/etc/hosts.sh && /usr/local/etc/hosts.sh
+
+RUN touch /run_on_start.sh && chmod +x /run_on_start.sh
 
 RUN mkdir -p /usr/etc/php-fpm.d/
 COPY php-fpm.conf /etc/php/8.3/fpm/php-fpm.conf
@@ -70,6 +72,6 @@ RUN update-ca-certificates -v
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-CMD ["/bin/bash", "-c", "/usr/local/etc/hosts.sh;php-fpm8.3 -F"]
+CMD ["/bin/bash", "-c", "/usr/local/etc/hosts.sh;/run_on_start.sh;php-fpm8.3 -F"]
 
 EXPOSE 9000
