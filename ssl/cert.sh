@@ -22,16 +22,16 @@ do
 	done
 	if [ ! -d "${name}" ]; then
 		mkdir ${name}
-		
+
 		echo -e ${DOMAIN_EXT} > ${name}/${name}.ext
-		
+
 		openssl req -new -nodes -newkey rsa:2048 -keyout ${name}/${name}.key -out ${name}/${name}.csr -subj "${SUBJECT}"
-		openssl x509 -req -sha256 -days 1024 -in ${name}/${name}.csr -CA root_ca.crt -CAkey root_ca.key -CAcreateserial -extfile ${name}/${name}.ext -out ${name}/${name}.crt
+		openssl x509 -req -sha256 -days 36500 -in ${name}/${name}.csr -CA root_ca.crt -CAkey root_ca.key -CAcreateserial -extfile ${name}/${name}.ext -out ${name}/${name}.crt
 		cp ./root_ca.pem ${name}/
 
 		rm -rf ${name}/${name}.csr
 		rm -rf ${name}/${name}.ext
 	fi
-	
+
 
 done
