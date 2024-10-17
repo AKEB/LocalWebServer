@@ -12,7 +12,7 @@ RUN apt-get clean && apt-get dist-upgrade -y \
 RUN apt-get install -y --allow-unauthenticated \
   iputils-ping curl \
     ca-certificates apt-transport-https software-properties-common lsb-release \
-    wget nano git sqlite3
+  wget nano git sqlite3 iproute2 dnsutils
 
 RUN curl -sSL https://packages.sury.org/php/README.txt | bash -x
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 # vim:sw=4:ts=4:et
 
-IP=`getent hosts host.docker.internal | awk '{print $1}'`
+IP=`nslookup host.docker.internal | grep "Address:"  | head -n 2 | tail -n 1 | awk '{print $2}'`
 
 echo "IP=${IP}"
 

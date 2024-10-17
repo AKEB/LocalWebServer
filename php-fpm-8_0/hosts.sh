@@ -3,7 +3,7 @@
 
 # uncomment this lines
 
-# IP=`getent hosts host.docker.internal | awk '{print $1}'`
+# IP=`nslookup host.docker.internal | grep "Address:"  | head -n 2 | tail -n 1 | awk '{print $2}'`
 # echo "${IP} my.local.ru" >> /etc/hosts
 # echo "${IP} my.local.com" >> /etc/hosts
 # echo "${IP} localhost" >> /etc/hosts
