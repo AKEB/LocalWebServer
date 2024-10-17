@@ -34,7 +34,7 @@ Then open [http://localhost:81/](http://localhost:81/)
 
 ```bash
 Email:    admin@example.com
-Password: changeme
+Password: change_me
 ```
 
 ### Add new proxy host
