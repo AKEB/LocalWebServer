@@ -3,14 +3,14 @@ name: "example"
 services:
 
   php-fpm:
-    image: babadzhanyan/php-fpm:${PHP_VERSION}
+    image: akeb/php-fpm:${PHP_VERSION}
     volumes:
       - ../:/var/www/html/:rw
       - ./logs/php.log:/var/log/php/php-fpm.log:rw
       - ./hosts.sh:/usr/local/etc/hosts.sh
 
   nginx:
-    image: babadzhanyan/nginx:latest
+    image: akeb/nginx:latest
     hostname: ${DOMAIN_NAME}
     volumes:
       - ../:/var/www/html/:rw
