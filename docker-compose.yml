@@ -1,4 +1,4 @@
-version: '3.8'
+---
 name: "local_web_server"
 services:
 
@@ -27,7 +27,7 @@ services:
     container_name: phpmyadmin_local
     hostname: phpmyadmin
     # image: phpmyadmin/phpmyadmin
-    image: arm64v8/phpmyadmin
+    image: arm64v8/phpmyadmin:latest
     restart: unless-stopped
     environment:
       - VIRTUAL_HOST=phpmyadmin

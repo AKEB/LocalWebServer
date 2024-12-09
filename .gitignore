@@ -8,3 +8,4 @@
 /logs/*.log
 root_ca.crt
 /build/
+/backup/
