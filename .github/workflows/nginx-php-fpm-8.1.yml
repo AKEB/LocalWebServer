@@ -30,11 +30,12 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Copy root certificate
-      run: echo "${{ secrets.ROOT_CRT }}" > ./nginx-php-fpm-8_1/root_ca.crt
+      run: echo "${{ secrets.ROOT_CRT }}" > ./nginx-php-fpm/root_ca.crt
 
     - name: build the image
       run: |
         docker buildx build \
+        --build-arg PHP_VERSION=8.1 \
         --push \
         --tag akeb/nginx-php-fpm:8.1 \
-        --platform linux/amd64,linux/arm/v7,linux/arm64/v8 ./nginx-php-fpm-8_1/
+        --platform linux/amd64,linux/arm/v7,linux/arm64/v8 ./nginx-php-fpm/
