@@ -6,7 +6,7 @@ services:
     image: akeb/nginx-php-fpm:${PHP_VERSION}
     hostname: ${DOMAIN_NAME}
     volumes:
-      - ../:/var/www/html/:rw
+      - ../:/app/:rw
       - ./logs/nginx/:/var/log/nginx/:rw
       - ./logs/php/:/var/log/php/:rw
       - ./hosts.sh:/usr/local/etc/hosts.sh

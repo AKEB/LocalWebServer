@@ -1,6 +1,6 @@
 FROM nginx:latest
 
-RUN mkdir -p /var/www/html \
+RUN mkdir -p /app \
 	&& mkdir -p /etc/cron.weekly \
 	&& mkdir -p /usr/share/GeoIP
 

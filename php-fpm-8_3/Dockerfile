@@ -2,7 +2,7 @@ FROM debian:12.5-slim
 
 ENV TZ=Europe/Moscow
 
-WORKDIR /var/www/html
+WORKDIR /app
 
 USER root
 

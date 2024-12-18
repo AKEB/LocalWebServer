@@ -1,7 +1,7 @@
 #!/bin/bash
 
 HOST_DIR=${1}/
-DOCKER_DIR="/var/www/html/"
+DOCKER_DIR="/app/"
 SCRIPT_DIR=`dirname ${2}`/
 FILE_NAME=${2/"$SCRIPT_DIR"/""}
 SCRIPT_DIR=${SCRIPT_DIR/"$HOST_DIR"/""}

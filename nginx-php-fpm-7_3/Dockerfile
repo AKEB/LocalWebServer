@@ -2,11 +2,11 @@ FROM debian:12.5-slim
 
 ENV TZ=Europe/Moscow
 
-RUN mkdir -p /var/www/html \
+RUN mkdir -p /app \
   && mkdir -p /etc/cron.weekly \
   && mkdir -p /usr/share/GeoIP
 
-WORKDIR /var/www/html
+WORKDIR /app
 
 USER root
 
