@@ -46,9 +46,6 @@ RUN apt-get install -y --allow-unauthenticated \
 RUN apt-get clean && apt-get dist-upgrade -y \
     && apt-get update -y --allow-insecure-repositories
 
-COPY hosts.sh /usr/local/etc/hosts.sh
-RUN chmod +x /usr/local/etc/hosts.sh && /usr/local/etc/hosts.sh
-
 RUN touch /run_on_start.sh && chmod +x /run_on_start.sh
 
 RUN mkdir -p /usr/etc/php-fpm.d/
@@ -60,6 +57,6 @@ RUN update-ca-certificates -v
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-CMD ["/bin/bash", "-c", "/usr/local/etc/hosts.sh;/run_on_start.sh;php-fpm${PHP_VERSION} -F"]
+CMD ["/bin/bash", "-c", "/run_on_start.sh;php-fpm${PHP_VERSION} -F"]
 
 EXPOSE 9000
