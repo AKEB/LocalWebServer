@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
+        version: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
     steps:
     - name: checkout code
       uses: actions/checkout@v2
@@ -42,6 +42,4 @@ jobs:
         --push \
         --tag akeb/nginx-php-fpm:${{ matrix.version }} \
         --platform linux/amd64,linux/arm/v7,linux/arm64/v8 \
-        --cache-from=type=gha \
-        --cache-to=type=gha,mode=max \
         ./nginx-php-fpm/
