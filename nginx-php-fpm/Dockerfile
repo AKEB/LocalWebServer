@@ -3,7 +3,7 @@ FROM debian:12.5-slim
 ARG PHP_VERSION="8.3"
 ENV PHP_VERSION=${PHP_VERSION}
 
-ENV TZ=Europe/Moscow
+ENV TZ=UTC
 
 RUN mkdir -p /app \
   && mkdir -p /etc/cron.weekly \
@@ -59,8 +59,6 @@ RUN apt-get install -y --allow-unauthenticated \
 RUN apt-get clean && apt-get dist-upgrade -y \
   && apt-get update -y --allow-insecure-repositories
 
-COPY hosts.sh /usr/local/etc/hosts.sh
-RUN chmod +x /usr/local/etc/hosts.sh && /usr/local/etc/hosts.sh
 RUN touch /run_on_start.sh && chmod +x /run_on_start.sh
 
 RUN mkdir -p /usr/etc/php-fpm.d/
@@ -77,7 +75,8 @@ RUN chmod +x /root/geoip_update.sh \
   && /root/geoip_update.sh \
   && update-ca-certificates -v
 
-CMD ["/bin/bash", "-c", "nginx -g 'daemon on;';/usr/local/etc/hosts.sh;/run_on_start.sh;php-fpm${PHP_VERSION} -F"]
+CMD ["/bin/bash", "-c", "nginx -g 'daemon on;';/run_on_start.sh;php-fpm${PHP_VERSION} -F"]
+
 
 EXPOSE 9000
 EXPOSE 80
