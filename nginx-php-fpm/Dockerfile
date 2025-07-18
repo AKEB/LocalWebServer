@@ -21,7 +21,10 @@ RUN apt-get install -y --allow-unauthenticated \
   ca-certificates apt-transport-https software-properties-common lsb-release \
   wget nano git sqlite3 iproute2 dnsutils procps mc nginx libnginx-mod-http-geoip
 
-RUN curl -sSL https://packages.sury.org/php/README.txt | bash -x
+RUN curl -sSLo /usr/share/keyrings/sury-php-archive-keyring.gpg \
+    https://packages.sury.org/php/apt.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/sury-php-archive-keyring.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" \
+    > /etc/apt/sources.list.d/sury-php.list
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/default.conf
