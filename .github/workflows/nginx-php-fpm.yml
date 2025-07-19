@@ -12,7 +12,6 @@ jobs:
     strategy:
       matrix:
         version: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
-        system: ['nginx-php-fpm', 'php-fpm']
     steps:
     - name: checkout code
       uses: actions/checkout@v2
@@ -34,13 +33,13 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Copy root certificate
-      run: echo "${{ secrets.ROOT_CRT }}" > ./${{ matrix.system }}/root_ca.crt
+      run: echo "${{ secrets.ROOT_CRT }}" > ./nginx-php-fpm/root_ca.crt
 
     - name: build the image
       run: |
         docker buildx build \
         --build-arg PHP_VERSION=${{ matrix.version }} \
         --push \
-        --tag akeb/${{ matrix.system }}:${{ matrix.version }} \
+        --tag akeb/nginx-php-fpm:${{ matrix.version }} \
         --platform linux/amd64,linux/arm/v7,linux/arm64/v8 \
-        ./${{ matrix.system }}/
+        ./nginx-php-fpm/
