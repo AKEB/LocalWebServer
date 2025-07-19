@@ -3,7 +3,7 @@ name: "example"
 services:
 
   nginx-php-fpm:
-    image: akeb/nginx-php-fpm:${PHP_VERSION}
+    image: akeb/nginx-php-fpm-${PHP_VERSION}:latest
     hostname: ${DOMAIN_NAME}
     volumes:
       - ../:/app/:rw
