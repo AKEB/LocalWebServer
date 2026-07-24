@@ -17,9 +17,10 @@ RUN apt-get install -y --allow-unauthenticated \
   ca-certificates apt-transport-https software-properties-common lsb-release \
   wget nano git sqlite3 iproute2 dnsutils
 
-RUN curl -sSLo /usr/share/keyrings/sury-php-archive-keyring.gpg \
-    https://packages.sury.org/php/apt.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/sury-php-archive-keyring.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" \
+RUN curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb \
+    && dpkg -i /tmp/debsuryorg-archive-keyring.deb \
+    && rm -f /tmp/debsuryorg-archive-keyring.deb \
+    && echo "deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" \
     > /etc/apt/sources.list.d/sury-php.list
 
 RUN apt-get clean && apt-get update -y --allow-insecure-repositories
